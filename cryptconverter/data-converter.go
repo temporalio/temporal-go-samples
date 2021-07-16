@@ -72,7 +72,7 @@ func NewCryptDataConverter(dataConverter converter.DataConverter) *CryptDataConv
 // ToPayloads converts a list of values.
 func (dc *CryptDataConverter) ToPayloads(values ...interface{}) (*commonpb.Payloads, error) {
 	if dc.context.KeyId == "" {
-		return dc.dataConverter.ToPayloads(values)
+		return dc.dataConverter.ToPayloads(values...)
 	}
 	key := dc.getKey(dc.context.KeyId)
 

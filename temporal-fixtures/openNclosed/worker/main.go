@@ -21,7 +21,7 @@ func main() {
 
 	w := worker.New(c, "open-n-closed", worker.Options{})
 
-	w.RegisterWorkflow(openNclosed.Workflow)
+	w.RegisterWorkflow(openNclosed.OpenNClosedWorkflow)
 	w.RegisterActivity(openNclosed.Activity)
 
 	err = w.Run(worker.InterruptCh())

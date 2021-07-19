@@ -37,8 +37,8 @@ func main() {
 			TaskQueue: "open-n-closed",
 		}
 
-		_, err := c.ExecuteWorkflow(context.Background(), workflowOptions, openNclosed.Workflow,
-			"Temporal", KeepOpen)
+		_, err := c.ExecuteWorkflow(context.Background(), workflowOptions,
+			openNclosed.OpenNClosedWorkflow, KeepOpen)
 		if err != nil {
 			log.Fatalln("Unable to execute workflow", err)
 		}

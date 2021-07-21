@@ -15,7 +15,7 @@ import (
 
 var (
 	NumberOfWorkflows = 5
-	KeepOpen          = true
+	KeepOpen          = false
 )
 
 func main() {
@@ -29,7 +29,7 @@ func main() {
 	uuidvar := uuid.New()
 	i := 1
 	for i <= NumberOfWorkflows {
-		id := uuidvar[:8] + "###___" + strconv.Itoa(i)
+		id := "open-n-closed##" + uuidvar[:6] + "##" + strconv.Itoa(i)
 		i++
 
 		workflowOptions := client.StartWorkflowOptions{
@@ -37,7 +37,7 @@ func main() {
 			TaskQueue: "open-n-closed",
 		}
 
-		_, err := c.ExecuteWorkflow(context.Background(), workflowOptions, openNclosed.Workflow,
+		_, err := c.ExecuteWorkflow(context.Background(), workflowOptions, openNclosed.OpenClosedFixtureWorkflow,
 			"Temporal", KeepOpen)
 		if err != nil {
 			log.Fatalln("Unable to execute workflow", err)

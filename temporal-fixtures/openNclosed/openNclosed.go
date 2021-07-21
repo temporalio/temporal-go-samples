@@ -8,29 +8,29 @@ import (
 	"go.temporal.io/sdk/workflow"
 )
 
-// Workflow is a Hello World workflow definition.
-func Workflow(ctx workflow.Context, name string, keep bool) (string, error) {
+// OpenClosedFixtureWorkflow is a basic Hello World workflow definition.
+func OpenClosedFixtureWorkflow(ctx workflow.Context, name string, keep bool) (string, error) {
 	ao := workflow.ActivityOptions{
 		StartToCloseTimeout: 10 * time.Second,
 	}
 	ctx = workflow.WithActivityOptions(ctx, ao)
 
 	logger := workflow.GetLogger(ctx)
-	logger.Info("HelloWorld workflow started", "name", name)
+	logger.Info("OpenClosedFixtureWorkflow started", "name", name)
 
 	var result string
-	err := workflow.ExecuteActivity(ctx, Activity, name, keep).Get(ctx, &result)
+	err := workflow.ExecuteActivity(ctx, OpenClosedFixtureActivity, name, keep).Get(ctx, &result)
 	if err != nil {
 		logger.Error("Activity failed.", "Error", err)
 		return "", err
 	}
 
-	logger.Info("HelloWorld workflow completed.", "result", result)
+	logger.Info("OpenClosedFixtureWorkflow completed.", "result", result)
 
 	return result, nil
 }
 
-func Activity(ctx context.Context, name string, keep bool) (string, error) {
+func OpenClosedFixtureActivity(ctx context.Context, name string, keep bool) (string, error) {
 	logger := activity.GetLogger(ctx)
 	logger.Info("Activity", "name", name)
 	if keep {

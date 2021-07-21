@@ -21,8 +21,8 @@ func main() {
 
 	w := worker.New(c, "open-n-closed", worker.Options{})
 
-	w.RegisterWorkflow(openNclosed.Workflow)
-	w.RegisterActivity(openNclosed.Activity)
+	w.RegisterWorkflow(openNclosed.OpenClosedFixtureWorkflow)
+	w.RegisterActivity(openNclosed.OpenClosedFixtureActivity)
 
 	err = w.Run(worker.InterruptCh())
 	if err != nil {
